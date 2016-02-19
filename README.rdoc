@@ -1,28 +1,40 @@
+
 == README
+# QuadTree
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation:
+================
+- clone repo into a local directory
+- You may need to run **rvm use ruby-2.3.0@quadtree** if rvm doesn't pick up the correct versions from the ruby-version and ruby-gemset files
+- Run **bundle install**
+.. - If it fails, run **gem install bundler --no-ri --no-rdoc** first, followed by **bundle install**
+.. - If you have issues with nokogiri, try ***gem install nokogiri -v '1.6.7.2' -- --use-system-libraries --with-xml2-include=/usr/include/libxml2 --with-xml2-lib=/usr/lib***
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+================
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Object:
+================
+- Define a quad tree structure and add nodes to it
+- A quadtree is a simple box container which will hold multiple nodes
+
+
+## Logic:
+================
+- A node can hold a single data point only
+- Once the node is full, if a new data point is added, the node must be split into 4 quadrants, with the new node added to the appropriate quadrant based on its x,y coords
+
+
+## Control:
+================
+- cd to project root, enter Rails console with **rails c**
+- Begin by creating a new quadtree instance, passing it coordinates (we're creating a box, so it doesn't have to be square, but shouldn't be more than 4)
+- Add multiple data_points with different x,y values to see the logic in action
+
+
+- **q = QuadTree.new({x1: 0, x2:100, y1:0, y2: 100})** => define quadtree instance
+- **q.has_nodes?** => should return false
+- **q.add_data_point(1,5)** => add data_points 
+
+================
+
