@@ -3,22 +3,14 @@ class Node
 
   attr_accessor :nodes, :node_data, :y1, :x1, :y2, :x2, :capacity, :node_count, :node_data
 
-  # class << self
-  #   def create_nodes
-  #     @x1 = coords[:x1] rescue nil
-  #     @x2 = coords[:x2] rescue nil
-  #     @y1 = coords[:y1] rescue nil
-  #     @y2 = coords[:y2] rescue nil
-  #   end
-  # end
   def initialize coords={}
     @x1 = coords[:x1] rescue nil
     @x2 = coords[:x2] rescue nil
     @y1 = coords[:y1] rescue nil
     @y2 = coords[:y2] rescue nil
-    @capacity = 1
+    @capacity = 0
     @node_count = 0
-    @nodes = []
+    @nodes = [] if @nodes.blank?
     @node_data = nil
     puts "self? #{self.inspect} ............"
   end
@@ -29,13 +21,10 @@ class Node
   end
 
   def create_nodes
-    if @nodes.blank?
-      4.times do |x|
-        coords = calculate_coords(x)
-        @nodes << Node.new(coords)
-        @node_count += 1
-      end
-    #else
+    4.times do |n|
+      coords = calculate_coords(n)
+      @nodes << Node.new(coords)
+      @node_count += 1
     end
     @nodes
   end
@@ -72,7 +61,6 @@ class Node
       coords[:x2] = @x2
       coords[:y2] = @y2
     end
-    puts "coords: #{coords.inspect}"
 
     coords
   end
@@ -81,5 +69,6 @@ class Node
   def is_full?
     @capacity == 1
   end
+
 
 end
